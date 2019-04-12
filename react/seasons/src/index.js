@@ -9,19 +9,31 @@ class App extends Component {
         super(props);
 
         this.state = {
-            lat: null
+            lat: null,
+            errorMessage: ''
         };
 
+                    /*
+            <div>
+                Latitude: {this.state.lat}
+                <br />
+                Error: {this.state.errorMessage}
+            </div>
+            */
         
         window.navigator.geolocation.getCurrentPosition(
             (position) => {
+                // console.log(position)
                 this.setState({ 
                     lat: position.coords.latitude
                 });
                 // we did not do this:
                 //      this.state.lat = position.coords.latitude.
             },
-            (err) => console.log(err)
+            (err) => {
+                //console.log(err)
+                this.setState({ errorMessage: err.message });
+            }
         );
     }
 
@@ -29,8 +41,17 @@ class App extends Component {
     // React says we have to define render
     render() {
 
+        let displayItem = <div>waiting...</div>;
+        if (this.state.errorMessage && !this.state.lat) {
+            displayItem = <div>Error: {this.state.errorMessage}</div> ;
+        } else if (!this.state.errorMessage && this.state.lat) {
+            displayItem = <div>Latitude: {this.state.lat}</div>
+        }
+
         return (
-            <div>Latitude: {this.state.lat}</div>
+            <div>
+                {displayItem}
+            </div>
         );
     }
 }
