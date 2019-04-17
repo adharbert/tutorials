@@ -1,4 +1,5 @@
 console.clear();
+// https://codepen.io/adharbert/pen/QPaPKp
 
 const createPolicy = (name, amount) => {
   return {
