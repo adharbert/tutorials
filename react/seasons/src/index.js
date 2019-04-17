@@ -1,56 +1,45 @@
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
+import Spinner from './Spinner';
 
 // state must be initialzed when a compenent is created
 // state can only be updated using the function setState();
 class App extends Component {
-    constructor(props) {
-        super(props);
+    state = { lat: null, errorMessage: '' };
 
-        this.state = {
-            lat: null,
-            errorMessage: ''
-        };
 
-                    /*
-            <div>
-                Latitude: {this.state.lat}
-                <br />
-                Error: {this.state.errorMessage}
-            </div>
-            */
-        
+    componentDidMount() {
+        console.log('My component was rendered to the screen');        
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                // console.log(position)
-                this.setState({ 
-                    lat: position.coords.latitude
-                });
-                // we did not do this:
-                //      this.state.lat = position.coords.latitude.
-            },
-            (err) => {
-                //console.log(err)
-                this.setState({ errorMessage: err.message });
-            }
+            (position) => this.setState({ lat: position.coords.latitude }), 
+            (err) => this.setState({ errorMessage: err.message })
         );
     }
 
+    componentDidUpdate() {
+        console.log('My component was just updated - it rerendered!');
+    }
+
+    contentRendered() {
+        let displayItem = <Spinner text="Please accept location request" />;
+        if (this.state.errorMessage && !this.state.lat) {
+            displayItem = <div>Error: {this.state.errorMessage}</div> ;
+        } else if (!this.state.errorMessage && this.state.lat) {
+            displayItem = <SeasonDisplay lat={this.state.lat} />
+        }
+        return displayItem;
+    };
 
     // React says we have to define render
     render() {
 
-        let displayItem = <div>waiting...</div>;
-        if (this.state.errorMessage && !this.state.lat) {
-            displayItem = <div>Error: {this.state.errorMessage}</div> ;
-        } else if (!this.state.errorMessage && this.state.lat) {
-            displayItem = <div>Latitude: {this.state.lat}</div>
-        }
+        
 
         return (
-            <div>
-                {displayItem}
+            <div className="border red">
+                {this.contentRendered()}
             </div>
         );
     }
