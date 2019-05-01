@@ -1,9 +1,10 @@
-import { SIGN_IN, SIGN_OUT } from './actionTypes';
+import * as actionTypes from './actionTypes';
+import streams from '../apis/streams';
 
 
 export const signIn = (userId) => {
     return {
-        type: SIGN_IN,
+        type: actionTypes.SIGN_IN,
         payload: userId
     };
 };
@@ -12,6 +13,61 @@ export const signIn = (userId) => {
 
 export const signOut = () => {
     return {
-        type: SIGN_OUT
+        type: actionTypes.SIGN_OUT
     };
+};
+
+
+
+/*
+export const createStream = (formValues) => {
+    return async (dispatch) => {
+        streams.post('/streams', formValues);
+    };
+};
+** below is short hand for this
+*/
+
+export const createStream = formValues => async dispatch => {
+    const response = await streams.post('/streams', formValues);
+    dispatch({
+        type: actionTypes.CREATE_STREAM,
+        payload: response.data
+    });
+};
+
+
+export const fetchStreams = () => async dispatch => {
+    const response = await streams.get('/streams');
+    dispatch({
+        type: actionTypes.FETCH_STREAMS,
+        payload: response.data
+    });
+};
+
+
+export const fetchStream = (id) => async dispatch => {
+    const response = await streams.get(`/streams/${id}`);
+    dispatch({
+        type: actionTypes.FETCH_STREAM,
+        payload: response.data
+    });
+};
+
+
+export const editStream = (id, formValues) => async dispatch => {
+    const response = await streams.put(`/streams/${id}`, formValues);
+    dispatch({
+        type: actionTypes.EDIT_STREAM,
+        payload: response.data
+    });
+};
+
+
+export const deleteStream = (id) => async dispatch => {
+    await streams.delete(`/streams/${id}`);
+    dispatch({
+        type: actionTypes.DELETE_STREAM,
+        payload: id
+    })
 };
