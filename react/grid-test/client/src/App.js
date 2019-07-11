@@ -39,12 +39,16 @@ class App extends Component {
         if (this.gridApi) {
             let rows = [];
             this.gridApi.forEachNodeAfterFilter(n => rows.push(n.data))
-
+        
             const price = rows.reduce((a,b) => (a + (+b.price || 0)) || 0, 0)
+            //const price = rows.reduce((a,b) => (a + (+ parseInt(b.price.replace(/\$|,/g, '')) || 0)) || 0,0)
             const footerPinnedRow = {
                 price: formatter.format(price).replace('.00', '')
             }
+            let x = { gridBottomRowData: [footerPinnedRow]};
+            console.log(x);
             this.setState({ gridBottomRowData: [footerPinnedRow]})
+           
         }
     }
 
@@ -57,6 +61,7 @@ class App extends Component {
 
         this.gridApi.forEachNodeAfterFilter(n => rows.push(n.data));
         this.updateGridFooter(rows);
+
     }
 
 
@@ -92,6 +97,18 @@ class App extends Component {
         );        
     }   
 }
+
+
+function currencyFormatter(params) {
+    //https://www.ag-grid.com/javascript-grid-value-getters/
+    return "$" + formatNumber(params.value);
+  }
+function formatNumber(number) {
+    return Math.floor(number)
+        .toString()
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+}
+
 
 const mapStateToProps = (state) => ({
     rowData: state.car

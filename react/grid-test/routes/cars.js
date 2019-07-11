@@ -8,16 +8,15 @@ const faker = require("faker");
 // @desc        Get a list of cars
 // @access      Public
 router.get("/", function(req, res) {
-    console.log("Cars get called");
-
     const fordItem = { type: 'Ford', model: 'Mustang', price: 35000 };
     const chevyItem = { type: 'Chevy', model: 'Corvette', price: 85000 };
     const dodgeItem = { type: 'Dodge', model: 'Charger', price: 42000 };
     const bmwItem = { type: 'BMW', model: 'M5', price: 95000 };
     const audiItem = { type: 'Audi', model: 'A8', price: 88000 };
     const vwItem = { type: 'VW', model: 'Arteon', price: 70000 };
+    const fordItem2 = { type: 'Ford', model: 'F150', price: 65000 };
     
-    const carArray = [fordItem, chevyItem, dodgeItem, bmwItem, audiItem, vwItem];
+    const carArray = [fordItem, chevyItem, dodgeItem, bmwItem, audiItem, vwItem, fordItem2];
 
 
     let results = [];
