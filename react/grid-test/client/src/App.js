@@ -86,7 +86,7 @@ class App extends Component {
             <div className="App">
                 <div className="container">
                     <div className="row">
-                        
+
                         <div className="ag-theme-dark" style={{ height: '500px', width: '620px' }}>
                             <AgGridReact    columnDefs={columnDefs}
                                             rowData={rowData}
@@ -107,7 +107,7 @@ class App extends Component {
     }   
 }
 
-
+/*
 function currencyFormatter(params) {
     //https://www.ag-grid.com/javascript-grid-value-getters/
     return "$" + formatNumber(params.value);
@@ -117,7 +117,7 @@ function formatNumber(number) {
         .toString()
         .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
-
+*/
 
 const mapStateToProps = (state) => ({
     rowData: state.car
