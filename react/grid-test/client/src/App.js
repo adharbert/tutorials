@@ -6,7 +6,7 @@ import './App.css';
 
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-bootstrap.css';
+import 'ag-grid-community/dist/styles/ag-theme-dark.css';
 
 
 
@@ -84,15 +84,24 @@ class App extends Component {
 
         return (
             <div className="App">
-                <div className="ag-theme-bootstrap" style={{ height: '500px', width: '620px' }}>
-                    <AgGridReact    columnDefs={columnDefs}
-                                    rowData={rowData}
-                                    onFilterChanged={this.updateGridFooter}
-                                    gridOptions={gridOptions}
-                                    onGridReady={this.onGridReady}
-                                    pinnedBottomRowData={this.state.gridBottomRowData}
-                    />
+                <div className="container">
+                    <div className="row">
+                        
+                        <div className="ag-theme-dark" style={{ height: '500px', width: '620px' }}>
+                            <AgGridReact    columnDefs={columnDefs}
+                                            rowData={rowData}
+                                            onFilterChanged={this.updateGridFooter}
+                                            gridOptions={gridOptions}
+                                            onGridReady={this.onGridReady}
+                                            pinnedBottomRowData={this.state.gridBottomRowData}
+                            />
+                        </div>
+
+
+                    </div>
+
                 </div>
+
             </div>
         );        
     }   
