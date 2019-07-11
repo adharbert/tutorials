@@ -1,0 +1,25 @@
+{
+  "name": "grid-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "client-build": "npm run build --prefix client",
+    "client": "npm start --prefix client",
+    "start": "node server.js",
+    "start-debugging": "node --inspect server.js",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Andrew Harbert",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.1",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "nodemon": "^1.19.1",
+    "path": "^0.12.7"
+  }
+}
