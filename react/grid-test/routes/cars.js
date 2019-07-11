@@ -15,12 +15,13 @@ router.get("/", function(req, res) {
     const audiItem = { type: 'Audi', model: 'A8', price: 88000 };
     const vwItem = { type: 'VW', model: 'Arteon', price: 70000 };
     const fordItem2 = { type: 'Ford', model: 'F150', price: 65000 };
+    const bentleyItem = { type: 'Bentley', model: 'Flying Spur', price: 180000 };
     
-    const carArray = [fordItem, chevyItem, dodgeItem, bmwItem, audiItem, vwItem, fordItem2];
+    const carArray = [fordItem, chevyItem, dodgeItem, bmwItem, audiItem, vwItem, fordItem2, bentleyItem];
 
 
     let results = [];
-    let rowCount = Math.random() * (100 - 50) + 50;
+    let rowCount = Math.random() * (150 - 50) + 50;
     for(i = 0; i < rowCount; i++) {
         let item = carArray[Math.floor(Math.random() * carArray.length)];
         results.push({
